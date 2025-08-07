@@ -55,6 +55,7 @@ class TerminationManager(ManagerBase):
         """
         # create buffers to parse and store terms
         self._term_names: list[str] = list()
+        self._term_name_to_term_idx = {name: i for i, name in enumerate(self._term_names)}
         self._term_cfgs: list[TerminationTermCfg] = list()
         self._class_term_cfgs: list[TerminationTermCfg] = list()
 
@@ -234,7 +235,7 @@ class TerminationManager(ManagerBase):
         if term_name not in self._term_names:
             raise ValueError(f"Termination term '{term_name}' not found.")
         # return the configuration
-        return self._term_cfgs[self._term_names.index(term_name)]
+        return self._term_cfgs[self._term_name_to_term_idx[term_name]]
 
     """
     Helper functions.
